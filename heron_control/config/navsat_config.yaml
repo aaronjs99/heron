@@ -1,0 +1,9 @@
+frequency: 20
+delay: 0.0
+magnetic_declination_radians: 0
+yaw_offset: 0.0
+zero_altitude: false
+broadcast_cartesian_transform: false
+broadcast_cartesian_transform_as_parent_frame: false
+publish_filtered_gps: false
+transform_timeout: 0.5
