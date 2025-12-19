@@ -1,1 +1,1 @@
-export HERON_URDF_EXTRAS=$(rospack find heron_simulation)/urdf/ig_handle_sensors.urdf.xacro
+export HERON_URDF_EXTRAS=$(rospack find heron_simulator)/urdf/ig_handle_sensors.urdf.xacro
