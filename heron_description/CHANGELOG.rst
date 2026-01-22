@@ -2,6 +2,13 @@
 Changelog for package heron_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.4.0 (2026-01-22)
+------------------
+* Removed all dependencies on UUV Simulator framework.
+* Replaced UUV-specific Gazebo plugins with standard Gazebo plugins.
+* Integrated custom vessel dynamics engine based on Fossen equations and empirical data.
+* Refactored project structure for improved modularity and ROS Noetic compatibility.
+
 0.3.4 (2021-02-12)
 ------------------
 * Fix disconnected thruster joints (`#12 <https://github.com/heron/heron/issues/12>`_)

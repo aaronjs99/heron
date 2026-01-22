@@ -39,30 +39,25 @@ This program contains the description of the robot base model for the Clearpath 
     <!-- The underwater object plugin is given as an input block parameter to
      allow the addition of external models of manipulator units -->
     <gazebo>
-      <plugin name="uuv_plugin" filename="libuuv_underwater_object_ros_plugin.so">
-        <fluid_density>1028.0</fluid_density>
-        <flow_velocity_topic>hydrodynamics/current_velocity</flow_velocity_topic>
-        <debug>$(arg debug)</debug>
-        <!-- Adding the hydrodynamic and hydrostatic parameters for the vehicle-->
-        <xacro:heron_hydro_model namespace="$(arg suffix_ns)" />
-        <!--
-          In case other modules are added to the vehicle (such as a manipulator)
-          that also have link running with the underwater object plugin, they
-          should also be added in this block. For this, this new module should
-          have a file similar to gazebo.xacro above with the description of the
-          parameter necessary for the underwater object plugin to be initialized.
-        -->
-      </plugin>
 
     </gazebo>
 
   </xacro:heron_base>
 
+  <!-- Hydrodynamic force plugin (to be driven by vessel_dynamics node) -->
+  <gazebo>
+    <plugin name="hydrodynamic_forces" filename="libgazebo_ros_force.so">
+      <bodyName>$(arg suffix_ns)base_link</bodyName>
+      <topicName>/$(arg namespace)/hydro_forces</topicName>
+    </plugin>
+  </gazebo>
+
   <!-- Joint state publisher plugin -->
   <gazebo>
-    <plugin name="joint_state_publisher" filename="libuuv_joint_state_publisher.so">
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
       <robotNamespace>/$(arg namespace)</robotNamespace>
       <updateRate>10</updateRate>
+      <jointName>thruster_0_joint, thruster_1_joint</jointName>
     </plugin>
   </gazebo>
 

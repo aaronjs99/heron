@@ -23,9 +23,9 @@
                   <height>${heron_height}</height>
               </box>
               <center_of_buoyancy>${heron_cob}</center_of_buoyancy>
-              <!-- The buoyancy plugin in the UUV Simulator can then be adapted
-                   to receive the additional parameters used to describe the
-                   buoyancy force computation for the surface vessel.
+              <!-- Parameters used to describe the buoyancy force computation 
+                   for the surface vessel as implemented in the custom force
+                   translation plugin.
               -->
               <metacentric_width>0.1</metacentric_width>
               <metacentric_length>0.1</metacentric_length>

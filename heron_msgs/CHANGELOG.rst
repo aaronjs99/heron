@@ -2,6 +2,10 @@
 Changelog for package heron_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.4.0 (2026-01-22)
+------------------
+* Cleaned up message dependencies and documentation following UUV Simulator removal.
+
 0.3.4 (2021-02-12)
 ------------------
 

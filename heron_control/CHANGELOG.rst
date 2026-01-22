@@ -2,6 +2,12 @@
 Changelog for package heron_control
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.4.0 (2026-01-22)
+------------------
+* Migrated control scripts to Python 3 for ROS Noetic compatibility.
+* Renamed scripts to include .py extensions and cleaned up directory structure.
+* Updated launch configurations to support new script organizational model.
+
 0.3.4 (2021-02-12)
 ------------------
 

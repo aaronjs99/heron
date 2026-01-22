@@ -20,7 +20,7 @@
     </node>
   </group>
 
-  <node pkg="heron_control" type="vel_cov" name="navsat_vel_cov" />
+  <node pkg="heron_control" type="vel_cov.py" name="navsat_vel_cov" />
 
   <!-- Override the default control parameters, see config/empty.yaml for default. -->
   <rosparam command="load" file="$(arg config_extras)" />
