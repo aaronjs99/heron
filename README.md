@@ -1,17 +1,14 @@
-# HERON: Unmanned Surface Vessel Platform
-
-[![ROS](https://img.shields.io/badge/ROS-Noetic-blue)](http://wiki.ros.org/noetic)
-[![License](https://img.shields.io/badge/license-BSD-lightgrey)]()
+# HERON: Unmanned Surface Vessel Platform Framework
 
 ## Abstract
 
-This is the meta-package for the Clearpath Heron USV found in the SLAM GRANDE system. It contains the physical descriptions (URDF), message definitions, and low-level control configurations required to operate the robot.
+This repository serves as the foundational meta-package for the Clearpath Heron USV within the SLAM GRANDE ecosystem. It encapsulates the high-fidelity digital representation of the platform, including kinematic and dynamic properties (URDF/SDF), specialized message definitions, and low-level control configurations essential for operational deployment.
 
-## Sub-Packages
+## Constituent Modules
 
-*   **heron_description**: URDF models, meshes, and collision geometries.
-*   **heron_msgs**: Custom ROS messages for thruster commands and status reports.
-*   **heron_control**: EKF localization and control configuration.
+*   **heron_description**: Comprehensive physical models, mesh geometries, and collision topologies.
+*   **heron_msgs**: Formal definitions for RPC and asynchronous communication, including thruster command protocols and system status reports.
+*   **heron_control**: Implementation of Extended Kalman Filter (EKF) localization and primary control manifold configurations.
 
 ## Related Packages
 
