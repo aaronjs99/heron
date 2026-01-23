@@ -48,14 +48,24 @@ This program contains the description of the robot base model for the Clearpath 
   <gazebo>
     <plugin name="hydrodynamic_forces" filename="libgazebo_ros_force.so">
       <bodyName>$(arg suffix_ns)base_link</bodyName>
-      <topicName>/$(arg namespace)/hydro_forces</topicName>
+      <xacro:if value="${'$(arg namespace)' != ''}">
+        <topicName>/$(arg namespace)/hydro_forces</topicName>
+      </xacro:if>
+      <xacro:unless value="${'$(arg namespace)' != ''}">
+        <topicName>/hydro_forces</topicName>
+      </xacro:unless>
     </plugin>
   </gazebo>
 
   <!-- Joint state publisher plugin -->
   <gazebo>
     <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-      <robotNamespace>/$(arg namespace)</robotNamespace>
+      <xacro:if value="${'$(arg namespace)' != ''}">
+        <robotNamespace>/$(arg namespace)</robotNamespace>
+      </xacro:if>
+      <xacro:unless value="${'$(arg namespace)' != ''}">
+        <robotNamespace>/</robotNamespace>
+      </xacro:unless>
       <updateRate>10</updateRate>
       <jointName>thruster_0_joint, thruster_1_joint</jointName>
     </plugin>
