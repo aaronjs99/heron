@@ -53,6 +53,14 @@
   <xacro:macro name="heron_base" params="namespace *gazebo">
 
 
+      <link name="${namespace}base_footprint"/>
+
+      <joint name="${namespace}base_footprint_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="${namespace}base_footprint" />
+        <child link="${namespace}base_link" />
+      </joint>
+
       <!-- Rigid body description of the base link -->
       <link name="${namespace}base_link">
         <!--
