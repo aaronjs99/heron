@@ -74,7 +74,8 @@
         <bodyName>$(arg suffix_ns)base_link</bodyName>
         <topicName>/$(arg suffix_ns)pose_gt</topicName>
         <gaussianNoise>0.0</gaussianNoise>
-        <frameName>world</frameName>
+        <!-- Keep Gazebo truth aligned with the navigation map frame in sim. -->
+        <frameName>map</frameName>
       </plugin>
     </gazebo>
 

@@ -40,8 +40,10 @@
       </joint>
 
       <gazebo>
-        <!-- Thruster force plugin using standard Gazebo -->
-        <plugin name="${robot_namespace}thruster_${thruster_id}_model" filename="libgazebo_ros_force.so">
+        <!-- Apply thrust in the thruster link frame. The stock gazebo_ros_force
+             plugin applies world-frame force, which makes the hull yaw while
+             still being pushed in a stale global direction. -->
+        <plugin name="${robot_namespace}thruster_${thruster_id}_model" filename="libRelativeForcePlugin.so">
           <bodyName>${suffix_ns}thruster_${thruster_id}</bodyName>
           <xacro:if value="${robot_namespace != ''}">
             <topicName>/${robot_namespace}/thrusters/${thruster_id}/input</topicName>
