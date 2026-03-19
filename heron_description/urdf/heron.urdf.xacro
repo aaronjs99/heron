@@ -39,7 +39,11 @@ This program contains the description of the robot base model for the Clearpath 
     <!-- The underwater object plugin is given as an input block parameter to
      allow the addition of external models of manipulator units -->
     <gazebo>
-
+      <plugin name="uuv_plugin" filename="libuuv_underwater_object_ros_plugin.so">
+        <fluid_density>997.7735</fluid_density>
+        <debug>$(arg debug)</debug>
+        <xacro:heron_hydro_model namespace="$(arg suffix_ns)"/>
+      </plugin>
     </gazebo>
 
   </xacro:heron_base>
@@ -64,7 +68,7 @@ This program contains the description of the robot base model for the Clearpath 
         <robotNamespace>/$(arg namespace)</robotNamespace>
       </xacro:if>
       <xacro:unless value="${'$(arg namespace)' != ''}">
-        <robotNamespace>/</robotNamespace>
+        <robotNamespace></robotNamespace>
       </xacro:unless>
       <updateRate>10</updateRate>
       <jointName>thruster_0_joint, thruster_1_joint</jointName>

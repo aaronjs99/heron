@@ -4,15 +4,19 @@
 
   <arg name="enable_ekf" default="true" />
   <arg name="enable_navsat" default="true" />
+  <arg name="startup_delay_sec" default="0.0" />
 
   <group if="$(arg enable_ekf)">
-    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node">
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node"
+          launch-prefix="bash -lc 'sleep $(arg startup_delay_sec); exec &quot;$0&quot; &quot;$@&quot;'">
       <rosparam command="load" file="$(find heron_control)/config/robot_localization.yaml" />
     </node>
   </group>
 
   <group if="$(arg enable_navsat)">
-    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="false" output="screen">
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node"
+          respawn="false" output="screen"
+          launch-prefix="bash -lc 'sleep $(arg startup_delay_sec); exec &quot;$0&quot; &quot;$@&quot;'">
       <rosparam command="load" file="$(find heron_control)/config/navsat_config.yaml" />
       <remap from="gps/fix" to="navsat/fix" />
       <rosparam param="datum" subst_value="True">[$(optenv GPS_DATUM 43.4720948, -80.5592608), 0.0]</rosparam>
@@ -20,7 +24,8 @@
     </node>
   </group>
 
-  <node pkg="heron_control" type="vel_cov.py" name="navsat_vel_cov" />
+  <node pkg="heron_control" type="vel_cov.py" name="navsat_vel_cov"
+        launch-prefix="bash -lc 'sleep $(arg startup_delay_sec); exec &quot;$0&quot; &quot;$@&quot;'" />
 
   <!-- Override the default control parameters, see config/empty.yaml for default. -->
   <rosparam command="load" file="$(arg config_extras)" />

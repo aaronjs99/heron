@@ -3,6 +3,7 @@
   <arg name="namespace" default="" />
   <arg name="joy_dev" default="$(optenv HERON_JOY_DEVICE /dev/input/js0)" />
   <arg name="joystick" default="false" />
+  <arg name="use_interactive_marker" default="false" />
 
   <group if="$(arg joystick)">
     <rosparam command="load" file="$(find heron_control)/config/teleop.yaml" />
@@ -16,7 +17,7 @@
   </group>
 
   <!-- Server for RViz Interactive Markers -->
-  <node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server">
+  <node if="$(arg use_interactive_marker)" pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server">
    <param name="link_name" value="$(arg namespace)/base_link" />
    <remap from="twist_marker_server/cmd_vel" to="cmd_vel_unscaled" />
   </node>

@@ -15,7 +15,10 @@
   <xacro:macro name="heron_hydro_model" params="namespace">
 
     <!-- List of hydrodynamic models this robot's links -->
-    <link name="${namespace}base_link">
+      <!-- Gazebo collapses the fixed-joint hull chain into base_footprint when
+           converting this URDF to SDF, so hydrodynamic plugins must target the
+           physical link name instead of the TF frame name base_link. -->
+      <link name="${namespace}base_footprint">
         <volume>${heron_volume}</volume>
         <box>
           <width>${heron_width}</width>
