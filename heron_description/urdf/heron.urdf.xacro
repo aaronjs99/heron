@@ -29,6 +29,7 @@ This program contains the description of the robot base model for the Clearpath 
   <xacro:arg name="debug" default="0"/>
   <xacro:arg name="namespace" default=""/>
   <xacro:arg name="suffix_ns" default="$(arg namespace)"/>
+  <xacro:property name="heron_fluid_density" value="$(optenv HERON_FLUID_DENSITY 997.7735)"/>
 
   <!-- Include the ROV macro file -->
   <xacro:include filename="$(find heron_description)/urdf/base.xacro"/>
@@ -40,7 +41,7 @@ This program contains the description of the robot base model for the Clearpath 
      allow the addition of external models of manipulator units -->
     <gazebo>
       <plugin name="uuv_plugin" filename="libuuv_underwater_object_ros_plugin.so">
-        <fluid_density>997.7735</fluid_density>
+        <fluid_density>${heron_fluid_density}</fluid_density>
         <debug>$(arg debug)</debug>
         <xacro:heron_hydro_model namespace="$(arg suffix_ns)"/>
       </plugin>

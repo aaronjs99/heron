@@ -1,1 +1,34 @@
 export HERON_URDF_EXTRAS=$(rospack find heron_simulator)/urdf/ig_handle_sensors.urdf.xacro
+
+# Match the heavier IG Handle benchmark hull instead of the lighter stock Heron defaults.
+# Keep the draft a little deeper so calm-water trim sits near the pontoon tops
+# instead of riding unrealistically high.
+export HERON_BASE_MASS=42.0
+export HERON_BASE_INERTIA_IXX=3.8
+export HERON_BASE_INERTIA_IYY=6.6
+export HERON_BASE_INERTIA_IZZ=10.0
+export HERON_FLUID_DENSITY=1025.0
+
+# Hydrodynamics: retain strong heave damping for surface stability, but raise
+# surge/sway/yaw damping and added mass so the hull does not feel underdamped
+# during turns and recoveries.
+export HERON_ADDED_MASS_X=30.0
+export HERON_ADDED_MASS_Y=60.0
+export HERON_ADDED_MASS_Z=60.0
+export HERON_ADDED_MASS_ROLL=0.0
+export HERON_ADDED_MASS_PITCH=30.0
+export HERON_ADDED_MASS_YAW=30.0
+
+export HERON_LINEAR_DAMPING_X=-30.0
+export HERON_LINEAR_DAMPING_Y=-70.0
+export HERON_LINEAR_DAMPING_Z=-150.0
+export HERON_LINEAR_DAMPING_ROLL=-20.0
+export HERON_LINEAR_DAMPING_PITCH=-45.0
+export HERON_LINEAR_DAMPING_YAW=-45.0
+
+export HERON_QUADRATIC_DAMPING_X=-15.0
+export HERON_QUADRATIC_DAMPING_Y=-45.0
+export HERON_QUADRATIC_DAMPING_Z=-80.0
+export HERON_QUADRATIC_DAMPING_ROLL=-15.0
+export HERON_QUADRATIC_DAMPING_PITCH=-45.0
+export HERON_QUADRATIC_DAMPING_YAW=-45.0

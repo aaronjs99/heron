@@ -11,6 +11,24 @@
   <xacro:property name="heron_length" value="1.35"/>
   <xacro:property name="heron_width"  value="1.0"/>
   <xacro:property name="heron_height" value="0.32"/>
+  <xacro:property name="added_mass_x" value="$(optenv HERON_ADDED_MASS_X 0.0)"/>
+  <xacro:property name="added_mass_y" value="$(optenv HERON_ADDED_MASS_Y 0.0)"/>
+  <xacro:property name="added_mass_z" value="$(optenv HERON_ADDED_MASS_Z 0.0)"/>
+  <xacro:property name="added_mass_roll" value="$(optenv HERON_ADDED_MASS_ROLL 0.0)"/>
+  <xacro:property name="added_mass_pitch" value="$(optenv HERON_ADDED_MASS_PITCH 0.0)"/>
+  <xacro:property name="added_mass_yaw" value="$(optenv HERON_ADDED_MASS_YAW 0.0)"/>
+  <xacro:property name="linear_damping_x" value="$(optenv HERON_LINEAR_DAMPING_X -25.0)"/>
+  <xacro:property name="linear_damping_y" value="$(optenv HERON_LINEAR_DAMPING_Y -24.0)"/>
+  <xacro:property name="linear_damping_z" value="$(optenv HERON_LINEAR_DAMPING_Z -150.0)"/>
+  <xacro:property name="linear_damping_roll" value="$(optenv HERON_LINEAR_DAMPING_ROLL -20.0)"/>
+  <xacro:property name="linear_damping_pitch" value="$(optenv HERON_LINEAR_DAMPING_PITCH -20.0)"/>
+  <xacro:property name="linear_damping_yaw" value="$(optenv HERON_LINEAR_DAMPING_YAW -10.0)"/>
+  <xacro:property name="quadratic_damping_x" value="$(optenv HERON_QUADRATIC_DAMPING_X -5.0)"/>
+  <xacro:property name="quadratic_damping_y" value="$(optenv HERON_QUADRATIC_DAMPING_Y -5.0)"/>
+  <xacro:property name="quadratic_damping_z" value="$(optenv HERON_QUADRATIC_DAMPING_Z -15.0)"/>
+  <xacro:property name="quadratic_damping_roll" value="$(optenv HERON_QUADRATIC_DAMPING_ROLL -8.0)"/>
+  <xacro:property name="quadratic_damping_pitch" value="$(optenv HERON_QUADRATIC_DAMPING_PITCH -8.0)"/>
+  <xacro:property name="quadratic_damping_yaw" value="$(optenv HERON_QUADRATIC_DAMPING_YAW -8.0)"/>
 
   <xacro:macro name="heron_hydro_model" params="namespace">
 
@@ -36,19 +54,19 @@
         <hydrodynamic_model>
           <type>fossen</type>
           <added_mass>
-             0   0   0   0   0   0
-             0   0   0   0   0   0
-             0   0   0   0   0   0
-             0   0   0   0   0   0
-             0   0   0   0   0   0
-             0   0   0   0   0   0
+             ${added_mass_x}   0   0   0   0   0
+             0   ${added_mass_y}   0   0   0   0
+             0   0   ${added_mass_z}   0   0   0
+             0   0   0   ${added_mass_roll}   0   0
+             0   0   0   0   ${added_mass_pitch}   0
+             0   0   0   0   0   ${added_mass_yaw}
           </added_mass>
           <offset_added_mass>0</offset_added_mass>
           <linear_damping>
-                -25 -24 -150 -20 -20 -10
+                ${linear_damping_x} ${linear_damping_y} ${linear_damping_z} ${linear_damping_roll} ${linear_damping_pitch} ${linear_damping_yaw}
             </linear_damping>
             <quadratic_damping>
-              -5 -5 -15 -8 -8 -8
+              ${quadratic_damping_x} ${quadratic_damping_y} ${quadratic_damping_z} ${quadratic_damping_roll} ${quadratic_damping_pitch} ${quadratic_damping_yaw}
             </quadratic_damping>
 
             <!-- Sanity check -->

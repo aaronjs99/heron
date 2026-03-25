@@ -25,6 +25,21 @@ this is the right place to start.
 If you need the simulation environment, use `heron_simulator`.
 If you need the low-level controller implementation, use `heron_controller`.
 
+## Benchmark Profile
+
+SLAM GRANDE carries an explicit benchmark profile for the IG Handle Heron in:
+
+- `heron_description/urdf/configs/ig_handle_benchmark`
+
+That file is where draft, inertia, added-mass, and damping changes are kept for
+the full simulation stack. It is the preferred place to tune the vehicle
+benchmark instead of burying those changes in launch-time ad hoc parameters.
+
+## Tests
+
+This repo now also carries package-level tests under `tests/`, including the
+velocity covariance helper checks used by the broader workspace.
+
 ## Typical Use
 
 ```bash

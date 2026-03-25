@@ -4,7 +4,10 @@
     Vehicle's parameters (remember to enter the model parameters below)
   -->
 
-  <xacro:property name="mass" value="28"/>
+  <xacro:property name="base_mass" value="$(optenv HERON_BASE_MASS 28.0)"/>
+  <xacro:property name="base_inertia_ixx" value="$(optenv HERON_BASE_INERTIA_IXX 10.0)"/>
+  <xacro:property name="base_inertia_iyy" value="$(optenv HERON_BASE_INERTIA_IYY 10.0)"/>
+  <xacro:property name="base_inertia_izz" value="$(optenv HERON_BASE_INERTIA_IZZ 10.0)"/>
   <!-- Center of gravity -->
   <xacro:property name="cog" value="0 0 -0.13"/>
   <!-- Fluid density -->
@@ -87,9 +90,9 @@
     <!-- Dummy Link to contain the inertial information for base_link -->
     <link name="${namespace}dummy_link">
       <inertial>
-        <mass value="${mass}" />
+        <mass value="${base_mass}" />
         <origin xyz="${cog}" rpy="0 0 0"/>
-        <inertia ixx="10" ixy="0" iyy = "10" ixz="0" iyz="0" izz="10" />
+        <inertia ixx="${base_inertia_ixx}" ixy="0" iyy="${base_inertia_iyy}" ixz="0" iyz="0" izz="${base_inertia_izz}" />
         <!-- <inertia ixx="0.017474" ixy="-0.000013" ixz="-0.000102"
                     iyy="0.017781"  iyz="-0.000058"
                             izz="0.033235" /> -->
@@ -121,7 +124,7 @@
       simulation="$(arg simulation)">
       <!-- Left Thruster -->
       <origin xyz="-0.53 0.377654 -0.16" rpy="0 0 0" />
-    </xacro:thruster_macro>s
+    </xacro:thruster_macro>
 
     <!-- Include the sensor modules -->
     <xacro:include filename="$(find heron_description)/urdf/sensors.xacro"/>
