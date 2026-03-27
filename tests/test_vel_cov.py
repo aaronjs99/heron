@@ -28,9 +28,7 @@ sys.modules["geometry_msgs.msg"] = mock_geometry_msgs
 sys.modules["sensor_msgs.msg"] = mock_sensor_msgs
 
 TEST_DIR = os.path.dirname(__file__)
-SCRIPT_DIR = os.path.abspath(
-    os.path.join(TEST_DIR, "..", "heron_control", "scripts")
-)
+SCRIPT_DIR = os.path.abspath(os.path.join(TEST_DIR, "..", "heron_control", "scripts"))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
@@ -60,7 +58,9 @@ class VelCovTests(unittest.TestCase):
                 sys.modules[_name] = _module
 
     def test_navfix_cb_updates_position_covariance_diagonal(self):
-        msg = SimpleNamespace(position_covariance=[1.1, 0.0, 0.0, 0.0, 2.2, 0.0, 0.0, 0.0, 3.3])
+        msg = SimpleNamespace(
+            position_covariance=[1.1, 0.0, 0.0, 0.0, 2.2, 0.0, 0.0, 0.0, 3.3]
+        )
 
         vel_cov.navfix_cb(msg)
 
@@ -71,7 +71,9 @@ class VelCovTests(unittest.TestCase):
     def test_navsat_cb_publishes_twist_with_cached_covariance(self):
         vel_cov.covariance = [float(i) for i in range(36)]
         header = SimpleNamespace(frame_id="map")
-        twist = SimpleNamespace(linear=SimpleNamespace(x=1.0), angular=SimpleNamespace(z=0.2))
+        twist = SimpleNamespace(
+            linear=SimpleNamespace(x=1.0), angular=SimpleNamespace(z=0.2)
+        )
         msg = SimpleNamespace(header=header, twist=twist)
 
         vel_cov.navsat_cb(msg)
