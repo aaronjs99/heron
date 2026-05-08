@@ -2,8 +2,8 @@
   <arg name="config_extras"
        default="$(eval optenv('HERON_CONFIG_EXTRAS', find('heron_control') + '/config/empty.yaml'))"/>
 
-  <arg name="enable_ekf" default="true" />
-  <arg name="enable_navsat" default="true" />
+  <arg name="enable_ekf" default="false" />
+  <arg name="enable_navsat" default="false" />
   <arg name="startup_delay_sec" default="0.0" />
 
   <group if="$(arg enable_ekf)">
