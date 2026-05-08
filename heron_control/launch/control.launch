@@ -24,7 +24,8 @@
     </node>
   </group>
 
-  <node pkg="heron_control" type="vel_cov.py" name="navsat_vel_cov"
+  <node if="$(arg enable_navsat)"
+        pkg="heron_control" type="vel_cov.py" name="navsat_vel_cov"
         launch-prefix="bash -lc 'sleep $(arg startup_delay_sec); exec &quot;$0&quot; &quot;$@&quot;'" />
 
   <!-- Override the default control parameters, see config/empty.yaml for default. -->
