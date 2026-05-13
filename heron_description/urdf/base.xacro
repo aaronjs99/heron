@@ -87,8 +87,8 @@
       </collision>
     </link>
 
-    <!-- Dummy Link to contain the inertial information for base_link -->
-    <link name="${namespace}dummy_link">
+    <!-- Inertial link for base_link. -->
+    <link name="${namespace}base_inertia_link">
       <inertial>
         <mass value="${base_mass}" />
         <origin xyz="${cog}" rpy="0 0 0"/>
@@ -100,9 +100,9 @@
       </inertial>
     </link>
 
-    <joint name="dummy_to_base" type="fixed">
+    <joint name="base_inertia_joint" type="fixed">
       <parent link="${namespace}base_link" />
-      <child link="${namespace}dummy_link" />
+      <child link="${namespace}base_inertia_link" />
     </joint>
 
     <gazebo reference="${namespace}base_link">
