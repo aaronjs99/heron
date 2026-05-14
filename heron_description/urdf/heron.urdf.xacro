@@ -49,9 +49,9 @@ This program contains the description of the robot base model for the Clearpath 
 
   </xacro:heron_base>
 
-  <!-- Hydrodynamic force plugin (to be driven by vessel_dynamics node).
-       Keep this relative to the hull frame for the same reason as the
-       thrusters: body forces should rotate with the boat. -->
+  <!-- Passive external wrench hook. Keep this relative to the hull frame for
+       the same reason as the thrusters: body forces should rotate with the
+       boat. Canonical slam_grande bringup does not publish this topic. -->
   <gazebo>
     <plugin name="hydrodynamic_forces" filename="libRelativeForcePlugin.so">
       <bodyName>$(arg suffix_ns)base_link</bodyName>
