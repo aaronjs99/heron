@@ -1,6 +1,10 @@
 export HERON_URDF_EXTRAS=$(rospack find heron_simulator)/urdf/ig_handle_sensors.urdf.xacro
 export HERON_IMU_XYZ="0.0656 0.0910 0.2030"
 export HERON_IMU_RPY="0 0 0"
+export HERON_CAMERA_F1=1
+export HERON_CAMERA_F2=0
+export HERON_CAMERA_F3=0
+export HERON_CAMERA_F4=1
 
 # Match the heavier IG Handle benchmark hull instead of the lighter stock Heron defaults.
 # Keep the draft a little deeper so calm-water trim sits near the pontoon tops
