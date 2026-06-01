@@ -11,6 +11,6 @@ install(DIRECTORY meshes launch urdf
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-install(PROGRAMS scripts/env_run
+install(PROGRAMS scripts/env_run.sh
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
