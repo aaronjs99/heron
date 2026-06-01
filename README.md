@@ -1,7 +1,7 @@
 # HERON
 
 This package family provides the platform description and core ROS interfaces
-for the Clearpath Heron USV used throughout SLAM GRANDE.
+for the Clearpath Heron USV.
 
 ## What Lives Here
 
@@ -27,7 +27,7 @@ If you need the low-level controller implementation, use `heron_controller`.
 
 ## Benchmark Profile
 
-SLAM GRANDE carries an explicit benchmark profile for the IG Handle Heron in:
+This workspace carries an explicit benchmark profile for the IG Handle Heron in:
 
 - `heron_description/urdf/configs/ig_handle_benchmark`
 
@@ -49,7 +49,7 @@ roslaunch heron_description description.launch
 That brings up the robot description so the rest of the stack can publish state,
 spawn the vehicle, or visualize the model.
 
-## Role In SLAM GRANDE
+## Role In The Workspace
 
 HERON is the common platform layer underneath:
 
