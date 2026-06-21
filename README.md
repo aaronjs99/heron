@@ -1,44 +1,26 @@
-# HERON
+# HERON Platform Packages
 
-This package family provides the platform description and core ROS interfaces
-for the Clearpath Heron USV.
+This repository contains the Heron platform description and core ROS interfaces
+used by the GRANDE workspace.
 
-## What Lives Here
+## Packages
 
-- `heron_description`
-  - URDF/Xacro, meshes, and physical layout
-- `heron_msgs`
-  - platform-specific ROS messages
-- `heron_control`
-  - state-estimation and control-related support
-
-## What This Package Is For
-
-If you need the vehicle’s:
-
-- geometry
-- platform messages
-- base platform conventions
-
-this is the right place to start.
-
-If you need the simulation environment, use `heron_simulator`.
-If you need the low-level controller implementation, use `heron_controller`.
+| Package | Purpose |
+| --- | --- |
+| `heron_description` | URDF/Xacro, meshes, and vehicle configuration profiles |
+| `heron_msgs` | Heron-specific ROS messages |
+| `heron_control` | Platform control and state-estimation support |
 
 ## Benchmark Profile
 
-This workspace carries an explicit benchmark profile for the IG Handle Heron in:
+The IG Handle benchmark vehicle profile lives at:
 
-- `heron_description/urdf/configs/ig_handle_benchmark`
+```text
+heron_description/urdf/configs/ig_handle_benchmark
+```
 
-That file is where draft, inertia, added-mass, and damping changes are kept for
-the full simulation stack. It is the preferred place to tune the vehicle
-benchmark instead of burying those changes in launch-time ad hoc parameters.
-
-## Tests
-
-This repo now also carries package-level tests under `tests/`, including the
-velocity covariance helper checks used by the broader workspace.
+Use that profile for simulation and full-stack integration work that needs the
+current hull, inertia, added-mass, damping, and sensor-mount assumptions.
 
 ## Typical Use
 
@@ -46,16 +28,17 @@ velocity covariance helper checks used by the broader workspace.
 roslaunch heron_description description.launch
 ```
 
-That brings up the robot description so the rest of the stack can publish state,
-spawn the vehicle, or visualize the model.
+The description launch publishes the robot model for visualization, simulation,
+and TF integration.
 
-## Role In The Workspace
+## Workspace Role
 
-HERON is the common platform layer underneath:
+HERON provides the shared platform layer under:
 
-- ORACLE
-- MARINER
-- simulator integration
-- control and sensing packages
+- MARINER navigation and drive bridging
+- HERON Simulator vehicle spawn
+- IG Handle sensor-frame integration
+- ORACLE mission execution context
 
-It gives the rest of the workspace a consistent vehicle definition.
+Keep platform geometry here; keep simulation worlds in `heron_simulator` and
+runtime sensing in `ig_handle`.

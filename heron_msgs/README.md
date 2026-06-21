@@ -1,36 +1,17 @@
 # heron_msgs
 
-ROS message definitions for the Heron platform.
-
-These messages sit between the vehicle-specific layers and the rest of the
-stack, especially for drive commands and platform health.
+`heron_msgs` defines the Heron-specific message contracts used by the platform,
+controller, simulator, and navigation bridge.
 
 ## Common Messages
 
-### `heron_msgs/Drive`
-
-Low-level left/right thruster command.
-
-| Field | Meaning |
-|---|---|
-| `left` | Left thruster effort |
-| `right` | Right thruster effort |
-
-### `heron_msgs/Helm`
-
-Higher-level thrust plus yaw-rate command.
-
-### `heron_msgs/Course`
-
-Heading plus forward-speed command.
-
-### `heron_msgs/Sense`
-
-MCU feedback including battery, currents, and RC override state.
-
-### `heron_msgs/Status`
-
-Platform health and power-consumption summary.
+| Message | Purpose |
+| --- | --- |
+| `heron_msgs/Drive` | Left/right thruster command |
+| `heron_msgs/Helm` | Higher-level thrust and yaw-rate command |
+| `heron_msgs/Course` | Heading and forward-speed command |
+| `heron_msgs/Sense` | MCU feedback, battery state, currents, and RC override state |
+| `heron_msgs/Status` | Platform health and power-consumption summary |
 
 ## Example
 
@@ -43,5 +24,5 @@ msg.right = 0.5
 drive_pub.publish(msg)
 ```
 
-This package is intentionally small: it exists so the rest of the workspace can
-share a consistent Heron-specific message contract.
+This package intentionally contains messages only. Control policy belongs in
+the controller and navigation packages.
