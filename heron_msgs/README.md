@@ -1,6 +1,6 @@
 # heron_msgs
 
-`heron_msgs` defines the Heron-specific message contracts used by the platform,
+`heron_msgs` defines the Heron-specific message interfaces used by the platform,
 controller, simulator, and navigation bridge.
 
 ## Common Messages
