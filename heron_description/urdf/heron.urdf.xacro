@@ -30,6 +30,19 @@ This program contains the description of the robot base model for the Clearpath 
   <xacro:arg name="namespace" default=""/>
   <xacro:arg name="suffix_ns" default="$(arg namespace)"/>
   <xacro:property name="heron_fluid_density" value="$(optenv HERON_FLUID_DENSITY 997.7735)"/>
+  <xacro:property name="disturbance_force_mean_x" value="$(optenv HERON_DISTURBANCE_FORCE_MEAN_X 0.0)"/>
+  <xacro:property name="disturbance_force_mean_y" value="$(optenv HERON_DISTURBANCE_FORCE_MEAN_Y 0.0)"/>
+  <xacro:property name="disturbance_force_mean_z" value="$(optenv HERON_DISTURBANCE_FORCE_MEAN_Z 0.0)"/>
+  <xacro:property name="disturbance_force_amplitude_x" value="$(optenv HERON_DISTURBANCE_FORCE_AMPLITUDE_X 0.0)"/>
+  <xacro:property name="disturbance_force_amplitude_y" value="$(optenv HERON_DISTURBANCE_FORCE_AMPLITUDE_Y 0.0)"/>
+  <xacro:property name="disturbance_force_amplitude_z" value="$(optenv HERON_DISTURBANCE_FORCE_AMPLITUDE_Z 0.0)"/>
+  <xacro:property name="disturbance_torque_mean_x" value="$(optenv HERON_DISTURBANCE_TORQUE_MEAN_X 0.0)"/>
+  <xacro:property name="disturbance_torque_mean_y" value="$(optenv HERON_DISTURBANCE_TORQUE_MEAN_Y 0.0)"/>
+  <xacro:property name="disturbance_torque_mean_z" value="$(optenv HERON_DISTURBANCE_TORQUE_MEAN_Z 0.0)"/>
+  <xacro:property name="disturbance_torque_amplitude_x" value="$(optenv HERON_DISTURBANCE_TORQUE_AMPLITUDE_X 0.0)"/>
+  <xacro:property name="disturbance_torque_amplitude_y" value="$(optenv HERON_DISTURBANCE_TORQUE_AMPLITUDE_Y 0.0)"/>
+  <xacro:property name="disturbance_torque_amplitude_z" value="$(optenv HERON_DISTURBANCE_TORQUE_AMPLITUDE_Z 0.0)"/>
+  <xacro:property name="disturbance_period_sec" value="$(optenv HERON_DISTURBANCE_PERIOD_SEC 12.0)"/>
 
   <!-- Include the ROV macro file -->
   <xacro:include filename="$(find heron_description)/urdf/base.xacro"/>
@@ -61,6 +74,17 @@ This program contains the description of the robot base model for the Clearpath 
       <xacro:unless value="${'$(arg namespace)' != ''}">
         <topicName>/hydro_forces</topicName>
       </xacro:unless>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="passive_disturbance" filename="libPassiveDisturbancePlugin.so">
+      <bodyName>$(arg suffix_ns)base_link</bodyName>
+      <forceMean>${disturbance_force_mean_x} ${disturbance_force_mean_y} ${disturbance_force_mean_z}</forceMean>
+      <forceAmplitude>${disturbance_force_amplitude_x} ${disturbance_force_amplitude_y} ${disturbance_force_amplitude_z}</forceAmplitude>
+      <torqueMean>${disturbance_torque_mean_x} ${disturbance_torque_mean_y} ${disturbance_torque_mean_z}</torqueMean>
+      <torqueAmplitude>${disturbance_torque_amplitude_x} ${disturbance_torque_amplitude_y} ${disturbance_torque_amplitude_z}</torqueAmplitude>
+      <periodSec>${disturbance_period_sec}</periodSec>
     </plugin>
   </gazebo>
 
