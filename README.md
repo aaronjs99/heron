@@ -1,7 +1,9 @@
 # HERON Platform Packages
 
-This repository contains the Heron platform description and core ROS interfaces
-used by the GRANDE workspace.
+This repository contains inherited Heron platform description and core ROS
+interfaces used by the GRANDE workspace. GRANDE consumes these interfaces but
+does not use this repository as the authority for real sensor extrinsics,
+runtime networking, or MCU firmware behavior.
 
 ## Packages
 

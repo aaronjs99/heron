@@ -26,3 +26,8 @@ drive_pub.publish(msg)
 
 This package intentionally contains messages only. Control policy belongs in
 the controller and navigation packages.
+
+The message definitions describe transport fields, not calibrated physical
+thrust. Treat `Drive.left` and `Drive.right` as normalized command interfaces;
+their relation to current, thrust, and vehicle motion must be established from
+validated platform evidence outside this message package.
