@@ -45,6 +45,7 @@
              still being pushed in a stale global direction. -->
         <plugin name="${robot_namespace}thruster_${thruster_id}_model" filename="libRelativeForcePlugin.so">
           <bodyName>${suffix_ns}thruster_${thruster_id}</bodyName>
+          <commandTimeout>0.5</commandTimeout>
           <xacro:if value="${robot_namespace != ''}">
             <topicName>/${robot_namespace}/thrusters/${thruster_id}/input</topicName>
           </xacro:if>

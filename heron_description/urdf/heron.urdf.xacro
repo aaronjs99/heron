@@ -68,6 +68,7 @@ This program contains the description of the robot base model for the Clearpath 
   <gazebo>
     <plugin name="hydrodynamic_forces" filename="libRelativeForcePlugin.so">
       <bodyName>$(arg suffix_ns)base_link</bodyName>
+      <commandTimeout>0.5</commandTimeout>
       <xacro:if value="${'$(arg namespace)' != ''}">
         <topicName>/$(arg namespace)/hydro_forces</topicName>
       </xacro:if>
