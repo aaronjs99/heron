@@ -44,3 +44,9 @@ HERON provides the shared platform layer under:
 
 Keep platform geometry here; keep simulation worlds in `heron_simulator` and
 runtime sensing in `ig_handle`.
+
+## File Structure
+
+| File | Relevance | Dependencies | Used by |
+| --- | --- | --- | --- |
+| .gitattributes | Forces Linux line endings for executable xacro environment profiles. | Git | HERON Simulator xacro launch |

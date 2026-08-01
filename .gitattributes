@@ -1,0 +1,2 @@
+# Linux executes the extensionless shell profiles during xacro expansion.
+heron_description/urdf/configs/* text eol=lf
