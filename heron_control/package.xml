@@ -18,6 +18,4 @@
   <exec_depend>python-numpy</exec_depend>
   <exec_depend>teleop_twist_joy</exec_depend>
 
-  <test_depend>roslaunch</test_depend>
-
 </package>
