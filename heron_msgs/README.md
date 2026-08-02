@@ -31,3 +31,10 @@ The message definitions describe transport fields, not calibrated physical
 thrust. Treat `Drive.left` and `Drive.right` as normalized command interfaces;
 their relation to current, thrust, and vehicle motion must be established from
 validated platform evidence outside this message package.
+
+## File Structure
+
+| File | Relevance | Dependencies | Used by |
+| --- | --- | --- | --- |
+| CMakeLists.txt | Declares HERON message generation and catkin exports. | catkin, message_generation, std_msgs | catkin build |
+| package.xml | Declares HERON message package metadata and ROS dependencies. | ROS Noetic | CMakeLists.txt, rosdep |
