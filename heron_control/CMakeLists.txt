@@ -12,4 +12,3 @@ install(DIRECTORY config launch
 install(PROGRAMS scripts/vel_cov
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-
