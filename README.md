@@ -45,7 +45,7 @@ HERON provides the shared platform layer under:
 Keep platform geometry here; keep simulation worlds in `heron_simulator` and
 runtime sensing in `ig_handle`.
 
-## File Structure
+# File Structure
 
 | File | Relevance | Dependencies | Used by |
 | --- | --- | --- | --- |

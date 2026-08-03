@@ -32,7 +32,7 @@ thrust. Treat `Drive.left` and `Drive.right` as normalized command interfaces;
 their relation to current, thrust, and vehicle motion must be established from
 validated platform evidence outside this message package.
 
-## File Structure
+# File Structure
 
 | File | Relevance | Dependencies | Used by |
 | --- | --- | --- | --- |
