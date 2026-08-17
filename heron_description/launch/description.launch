@@ -2,6 +2,8 @@
 
   <arg name="hydro_debug" default="0" />
   <arg name="config" default="base" />
+  <arg name="sensor_frames_file" default=""
+       doc="Optional canonical sensor-frame YAML consumed by geometry-exporting vehicle profiles." />
   <arg name="simulation" default="false" />
   <arg name="namespace" default=""/>
   <arg name="run_robot_state_publisher" default="true" />
@@ -10,14 +12,16 @@
 
     <group if="$(eval namespace == '')">
       <param name="robot_description"
-             command="rosrun heron_description env_run.sh $(find heron_description)/urdf/configs/$(arg config)
+             command="env HERON_SENSOR_FRAMES_FILE='$(arg sensor_frames_file)'
+                      rosrun heron_description env_run.sh $(find heron_description)/urdf/configs/$(arg config)
                       xacro '$(find heron_description)/urdf/heron.urdf.xacro'
                       debug:=$(arg hydro_debug) simulation:=$(arg simulation)" />
     </group>
 
     <group unless="$(eval namespace == '')">
       <param name="robot_description"
-             command="rosrun heron_description env_run.sh $(find heron_description)/urdf/configs/$(arg config)
+             command="env HERON_SENSOR_FRAMES_FILE='$(arg sensor_frames_file)'
+                      rosrun heron_description env_run.sh $(find heron_description)/urdf/configs/$(arg config)
                       xacro '$(find heron_description)/urdf/heron.urdf.xacro'
                       debug:=$(arg hydro_debug) simulation:=$(arg simulation)
                       namespace:=$(arg namespace) suffix_ns:=$(arg namespace)/" />

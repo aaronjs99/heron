@@ -1,3 +1,7 @@
+The `ig_handle_benchmark` profile uses the sensor-frame YAML explicitly selected
+by `description.launch`; standalone launches retain the canonical IG Handle file,
+and invalid profiles or frame files stop description generation before xacro runs.
+
 # File Structure
 
 | File | Relevance | Dependencies | Used by |

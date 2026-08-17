@@ -1,5 +1,14 @@
 export HERON_URDF_EXTRAS=$(rospack find heron_simulator)/urdf/sensors.urdf.xacro
-eval "$(rosrun ig_handle export.py --format shell)"
+if [[ -z "${HERON_SENSOR_FRAMES_FILE:-}" ]]; then
+  export HERON_SENSOR_FRAMES_FILE="$(rospack find ig_handle)/config/sensors/sensor_frames.yaml"
+fi
+sensor_frame_exports="$(
+  rosrun ig_handle export.py \
+    --sensor-frames "${HERON_SENSOR_FRAMES_FILE}" \
+    --format shell
+)"
+eval "${sensor_frame_exports}"
+unset sensor_frame_exports
 export HERON_CAMERA_F1=1
 export HERON_CAMERA_F2=0
 export HERON_CAMERA_F3=0
