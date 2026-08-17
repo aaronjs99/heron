@@ -36,5 +36,5 @@ validated platform evidence outside this message package.
 
 | File | Relevance | Dependencies | Used by |
 | --- | --- | --- | --- |
-| CMakeLists.txt | Declares HERON message generation and catkin exports. | catkin, message_generation, std_msgs | catkin build |
-| package.xml | Declares HERON message package metadata and ROS dependencies. | ROS Noetic | CMakeLists.txt, rosdep |
+| CMakeLists.txt | Declares HERON message generation and catkin exports. | CMake 3.0.2+, catkin, message_generation, std_msgs | catkin build |
+| package.xml | Declares HERON message generation, runtime, and exported `std_msgs` dependency contracts. | ROS Noetic | CMakeLists.txt, rosdep |
