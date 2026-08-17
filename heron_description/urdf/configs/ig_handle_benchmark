@@ -1,5 +1,5 @@
 export HERON_URDF_EXTRAS=$(rospack find heron_simulator)/urdf/sensors.urdf.xacro
-eval "$($(rospack find ig_handle)/scripts/frames/export.py --format shell)"
+eval "$(rosrun ig_handle export.py --format shell)"
 export HERON_CAMERA_F1=1
 export HERON_CAMERA_F2=0
 export HERON_CAMERA_F3=0
