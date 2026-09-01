@@ -1,13 +1,13 @@
 # Specific system status data, transmitted by the MCU at 1Hz on status topic.
 
-Header header
+std_msgs/Header header
 
 # Commit of firmware source.
 string hardware_id
 
 # Times since MCU power-on and MCU rosserial connection, respectively.
-duration mcu_uptime
-duration connection_uptime
+builtin_interfaces/Duration mcu_uptime
+builtin_interfaces/Duration connection_uptime
 
 # Temperature of PCB as measured by internal AVR thermometer,
 # reported in degrees centigrade.

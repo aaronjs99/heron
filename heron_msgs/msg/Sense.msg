@@ -1,7 +1,7 @@
 # General MCU status for Heron transmitted from the MCU
 # to higher-level software on the /sense topic.
 
-Header header
+std_msgs/Header header
 
 # Voltage level of battery, in volts
 float32 battery

@@ -1,24 +1,18 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.8)
 project(heron_msgs)
 
-find_package(catkin REQUIRED COMPONENTS
-  std_msgs
-  message_generation
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(builtin_interfaces REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Course.msg"
+  "msg/Drive.msg"
+  "msg/Helm.msg"
+  "msg/Sense.msg"
+  "msg/Status.msg"
+  DEPENDENCIES std_msgs
 )
 
-## Generate messages in the 'msg' folder
-add_message_files(
-  FILES
-  Course.msg
-  Drive.msg
-  Helm.msg
-  Sense.msg
-  Status.msg
-)
-
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-)
-
-catkin_package(CATKIN_DEPENDS std_msgs message_runtime)
+ament_package()
