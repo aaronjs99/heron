@@ -22,50 +22,46 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-import rospy
+import rclpy
+from rclpy.node import Node
+
 import numpy as np
 from geometry_msgs.msg import TwistStamped
 from geometry_msgs.msg import TwistWithCovarianceStamped
 from sensor_msgs.msg import NavSatFix
 
 
-def navfix_cb(msg):
-    global covariance
+class NavsatVelCov(Node):
+    def __init__(self):
+        super().__init__("navsat_vel_cov")
+        self.covariance = list((10 * np.identity(6)).reshape((36,)))
+        self.navsat_sub = self.create_subscription(
+            TwistStamped, "navsat/vel", self.navsat_cb, 10)
+        self.navfix_sub = self.create_subscription(
+            NavSatFix, "navsat/fix", self.navfix_cb, 10)
+        self.vel_pub = self.create_publisher(
+            TwistWithCovarianceStamped, "navsat/vel_cov", 1)
 
-    covariance[0] = msg.position_covariance[0]
-    covariance[7] = msg.position_covariance[4]
-    covariance[14] = msg.position_covariance[8]
+    def navfix_cb(self, msg):
+        self.covariance[0] = msg.position_covariance[0]
+        self.covariance[7] = msg.position_covariance[4]
+        self.covariance[14] = msg.position_covariance[8]
+
+    def navsat_cb(self, msg):
+        new_msg = TwistWithCovarianceStamped()
+        new_msg.header = msg.header
+        new_msg.twist.twist = msg.twist
+        new_msg.twist.covariance = self.covariance
+        self.vel_pub.publish(new_msg)
 
 
-def navsat_cb(msg):
-    global vel_pub
-    global covariance
-
-    new_msg = TwistWithCovarianceStamped()
-
-    new_msg.header = msg.header
-    new_msg.twist.twist = msg.twist
-    new_msg.twist.covariance = covariance
-
-    vel_pub.publish(new_msg)
-
-
-def add_cov():
-    global vel_pub
-    global covariance
-
-    rospy.init_node("navsat_vel_cov")
-
-    navsat_sub = rospy.Subscriber("navsat/vel", TwistStamped, navsat_cb)
-    navfix_sub = rospy.Subscriber("navsat/fix", NavSatFix, navfix_cb)
-    vel_pub = rospy.Publisher(
-        "navsat/vel_cov", TwistWithCovarianceStamped, queue_size=1
-    )
-
-    covariance = list((10 * np.identity(6)).reshape((36,)))
-
-    rospy.spin()
+def main():
+    rclpy.init()
+    node = NavsatVelCov()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
 
 if __name__ == "__main__":
-    add_cov()
+    main()
