@@ -50,4 +50,4 @@ runtime sensing in `ig_handle`.
 | File | Relevance | Dependencies | Used by |
 | --- | --- | --- | --- |
 | .gitattributes | Forces Linux line endings for executable xacro environment profiles. | Git | HERON Simulator xacro launch |
-| .gitignore | Excludes generated HERON build and runtime artifacts. | Git | Repository contributors |
+| .gitignore | Applies the shared GRANDE exclusions for local environments, generated build/runtime artifacts, recordings, media, and editor state; this repository adds no package-specific exclusions. | Git | Repository contributors |

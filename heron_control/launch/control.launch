@@ -5,11 +5,14 @@
   <arg name="enable_ekf" default="false" />
   <arg name="enable_navsat" default="false" />
   <arg name="startup_delay_sec" default="0.0" />
+  <arg name="imu_topic" default="/sensors/imu/data"
+       doc="Canonical external IMU topic. The selected robot description must publish its measured base_link to imu_link transform." />
 
   <group if="$(arg enable_ekf)">
     <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node"
           launch-prefix="bash -lc 'sleep $(arg startup_delay_sec); exec &quot;$0&quot; &quot;$@&quot;'">
       <rosparam command="load" file="$(find heron_control)/config/robot_localization.yaml" />
+      <param name="imu0" value="$(arg imu_topic)" />
     </node>
   </group>
 
@@ -19,6 +22,7 @@
           launch-prefix="bash -lc 'sleep $(arg startup_delay_sec); exec &quot;$0&quot; &quot;$@&quot;'">
       <rosparam command="load" file="$(find heron_control)/config/navsat_config.yaml" />
       <remap from="gps/fix" to="navsat/fix" />
+      <remap from="imu/data" to="$(arg imu_topic)" />
       <rosparam param="datum" subst_value="True">[$(optenv GPS_DATUM 43.4720948, -80.5592608), 0.0]</rosparam>
       <param name="wait_for_datum" value="$(eval optenv('GPS_DATUM') != '')" />
     </node>

@@ -13,9 +13,11 @@ publish_tf: true
 print_diagnostics: true
 
 # -------------------------------------
-# External IMU:
+# External IMU.  The topic is canonical across the IG Handle sensor stack.
+# The active robot description must also publish the measured
+# base_link -> imu_link transform; a topic match alone is not sufficient.
 # -------------------------------------
-imu0: imu/data
+imu0: /sensors/imu/data
 imu0_config: [false, false, false,
               false, false, true,
               false, false, false,
