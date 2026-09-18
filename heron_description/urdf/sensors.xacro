@@ -74,8 +74,9 @@
         <bodyName>$(arg suffix_ns)base_link</bodyName>
         <topicName>/$(arg suffix_ns)pose_gt</topicName>
         <gaussianNoise>0.0</gaussianNoise>
-        <!-- Keep Gazebo truth aligned with the navigation map frame in sim. -->
-        <frameName>map</frameName>
+        <!-- Gazebo publishes a world pose; label it truthfully and transform it
+             only in evaluation using the declared scenario spawn pose. -->
+        <frameName>world</frameName>
       </plugin>
     </gazebo>
 
