@@ -6,3 +6,5 @@
 # be used. For example, for a Heron with a modified EKF configuration
 # This can be used to change ekf_localization_node/odom0 and odom0_config
 # parameters to use a different IMU
+empty:
+  ros__parameters: {}
