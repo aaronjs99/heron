@@ -27,7 +27,7 @@ current hull, inertia, added-mass, damping, and sensor-mount assumptions.
 ## Typical Use
 
 ```bash
-roslaunch heron_description description.launch
+ros2 launch heron_description description.launch.py
 ```
 
 The description launch publishes the robot model for visualization, simulation,

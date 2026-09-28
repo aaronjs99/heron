@@ -36,5 +36,5 @@ validated platform evidence outside this message package.
 
 | File | Relevance | Dependencies | Used by |
 | --- | --- | --- | --- |
-| CMakeLists.txt | Declares HERON message generation and catkin exports. | CMake 3.0.2+, catkin, message_generation, std_msgs | catkin build |
-| package.xml | Declares HERON message generation, runtime, and exported `std_msgs` dependency contracts. | ROS Noetic | CMakeLists.txt, rosdep |
+| CMakeLists.txt | Declares HERON message generation and ament exports. | CMake 3.8+, ament_cmake, rosidl, std_msgs | colcon build |
+| package.xml | Declares HERON message generation, runtime, and exported `std_msgs` dependency contracts. | ROS 2 Jazzy | CMakeLists.txt, rosdep |

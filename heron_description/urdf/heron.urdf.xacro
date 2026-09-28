@@ -60,10 +60,10 @@ This program contains the description of the robot base model for the Clearpath 
 
   <!-- Create the heron -->
   <xacro:heron_base namespace="$(arg suffix_ns)">
-    <!-- Keep the surface vessel at its waterline with an owned Noetic/Gazebo
+    <!-- Keep the surface vessel at its waterline with an owned Gazebo Sim
          model. This replaces the obsolete external UUV Simulator plugin. -->
     <gazebo>
-      <plugin name="surface_hydrodynamics" filename="libSurfaceHydrodynamicsPlugin.so">
+      <plugin name="grande::simulation::SurfaceHydrodynamicsPlugin" filename="libSurfaceHydrodynamicsPlugin.so">
         <bodyName>$(arg suffix_ns)base_footprint</bodyName>
         <equilibriumZ>0.0</equilibriumZ>
         <heaveStiffness>900.0</heaveStiffness>
@@ -83,7 +83,7 @@ This program contains the description of the robot base model for the Clearpath 
        the same reason as the thrusters: body forces should rotate with the
        boat. Canonical integrated bringup does not publish this topic. -->
   <gazebo>
-    <plugin name="hydrodynamic_forces" filename="libRelativeForcePlugin.so">
+    <plugin name="grande::simulation::RelativeForcePlugin" filename="libRelativeForcePlugin.so">
       <bodyName>$(arg suffix_ns)base_link</bodyName>
       <commandTimeout>0.5</commandTimeout>
       <xacro:if value="${'$(arg namespace)' != ''}">
@@ -96,7 +96,7 @@ This program contains the description of the robot base model for the Clearpath 
   </gazebo>
 
   <gazebo>
-    <plugin name="passive_disturbance" filename="libPassiveDisturbancePlugin.so">
+    <plugin name="grande::simulation::PassiveDisturbancePlugin" filename="libPassiveDisturbancePlugin.so">
       <bodyName>$(arg suffix_ns)base_link</bodyName>
       <forceMean>${disturbance_force_mean_x} ${disturbance_force_mean_y} ${disturbance_force_mean_z}</forceMean>
       <forceAmplitude>${disturbance_force_amplitude_x} ${disturbance_force_amplitude_y} ${disturbance_force_amplitude_z}</forceAmplitude>
@@ -106,17 +106,28 @@ This program contains the description of the robot base model for the Clearpath 
     </plugin>
   </gazebo>
 
-  <!-- Joint state publisher plugin -->
+  <!-- Gazebo Sim publishes joint state in Gazebo Transport. ros_gz_bridge
+       exposes it as /joint_states for robot_state_publisher. -->
   <gazebo>
-    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
-      <xacro:if value="${'$(arg namespace)' != ''}">
-        <robotNamespace>/$(arg namespace)</robotNamespace>
-      </xacro:if>
-      <xacro:unless value="${'$(arg namespace)' != ''}">
-        <robotNamespace></robotNamespace>
-      </xacro:unless>
-      <updateRate>10</updateRate>
-      <jointName>thruster_0_joint, thruster_1_joint</jointName>
+    <plugin name="gz::sim::systems::JointStatePublisher"
+            filename="gz-sim-joint-state-publisher-system">
+      <topic>/joint_states</topic>
+      <joint_name>$(arg suffix_ns)thruster_0_joint</joint_name>
+      <joint_name>$(arg suffix_ns)thruster_1_joint</joint_name>
+    </plugin>
+  </gazebo>
+
+  <!-- Ground truth is exposed for labelled simulation/evaluation only. It is
+       not an estimator or navigation feedback source. -->
+  <gazebo>
+    <plugin name="gz::sim::systems::OdometryPublisher"
+            filename="gz-sim-odometry-publisher-system">
+      <odom_frame>world</odom_frame>
+      <robot_base_frame>$(arg suffix_ns)base_link</robot_base_frame>
+      <odom_publish_frequency>20</odom_publish_frequency>
+      <odom_topic>/pose_gt</odom_topic>
+      <dimensions>3</dimensions>
+      <gaussian_noise>0.0</gaussian_noise>
     </plugin>
   </gazebo>
 

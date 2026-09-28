@@ -47,9 +47,6 @@
       </visual>
     </link>
 
-    <gazebo reference="${namespace}${side}_panel_link">
-      <material>Gazebo/Yellow</material>
-    </gazebo>
     </xacro:macro>
 
   <!-- Vehicle macro -->
@@ -107,7 +104,6 @@
 
     <gazebo reference="${namespace}base_link">
       <selfCollide>false</selfCollide>
-      <material>Gazebo/DarkGrey</material>
       <gravity>1</gravity>
     </gazebo>
 
@@ -115,12 +111,12 @@
     <xacro:insert_block name="gazebo"/>
 
     <!-- Include the thruster modules -->
-    <xacro:thruster_macro robot_namespace="$(arg namespace)" suffix_ns="$(arg suffix_ns)" thruster_id="0"
+    <xacro:thruster_macro robot_namespace="$(arg namespace)" suffix_ns="$(arg suffix_ns)" thruster_id="0" side="right"
       simulation="$(arg simulation)">
       <!-- Right Thruster -->
       <origin xyz="-0.53 -0.377654 -0.16" rpy="0 0 0" />
     </xacro:thruster_macro>
-    <xacro:thruster_macro robot_namespace="$(arg namespace)" suffix_ns="$(arg suffix_ns)" thruster_id="1"
+    <xacro:thruster_macro robot_namespace="$(arg namespace)" suffix_ns="$(arg suffix_ns)" thruster_id="1" side="left"
       simulation="$(arg simulation)">
       <!-- Left Thruster -->
       <origin xyz="-0.53 0.377654 -0.16" rpy="0 0 0" />
@@ -133,7 +129,7 @@
     <xacro:panel namespace="$(arg suffix_ns)" side="left" location="1" />
     <xacro:panel namespace="$(arg suffix_ns)" side="right" location="-1" />
 
-    <xacro:include filename="$(find heron_description)/urdf/accessories.urdf.xacro" />
+  <xacro:include filename="$(find heron_description)/urdf/accessories.urdf.xacro" />
 
     <!-- Optional custom includes. -->
     <xacro:include filename="$(optenv HERON_URDF_EXTRAS empty.urdf)" />

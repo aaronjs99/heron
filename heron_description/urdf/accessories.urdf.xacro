@@ -26,9 +26,6 @@
       <origin xyz="-0.1915 0.0 0.001" />
     </joint>
 
-    <gazebo reference="${suffix_ns}rear_plate">
-      <material>Gazebo/DarkGrey</material>
-    </gazebo>
   </xacro:macro>
 
   <!-- If enabled, generate a Novatel Smart6 payload. -->

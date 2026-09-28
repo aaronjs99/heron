@@ -1,9 +1,9 @@
-export HERON_URDF_EXTRAS=$(rospack find heron_simulator)/urdf/sensors.urdf.xacro
+export HERON_URDF_EXTRAS="$(ros2 pkg prefix --share heron_simulator)/urdf/sensors.urdf.xacro"
 if [[ -z "${HERON_SENSOR_FRAMES_FILE:-}" ]]; then
-  export HERON_SENSOR_FRAMES_FILE="$(rospack find ig_handle)/config/sensors/sensor_frames.yaml"
+  export HERON_SENSOR_FRAMES_FILE="$(ros2 pkg prefix --share ig_handle)/config/sensors/platform/sensor_frames.yaml"
 fi
 sensor_frame_exports="$(
-  rosrun ig_handle export.py \
+  ros2 run ig_handle export.py \
     --sensor-frames "${HERON_SENSOR_FRAMES_FILE}" \
     --format shell
 )"

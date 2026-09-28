@@ -16,10 +16,6 @@
       <child link="${suffix_ns}${prefix}_laser" />
     </joint>
 
-    <gazebo reference="${suffix_ns}${prefix}_laser_mount">
-      <material>Gazebo/DarkGrey</material>
-    </gazebo>
-
   </xacro:macro>
 
 </robot>
