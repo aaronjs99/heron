@@ -1,2 +1,12 @@
-# Linux executes the extensionless shell profiles during xacro expansion.
-heron_description/urdf/configs/* text eol=lf
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.bag binary
+*.db binary
+*.pt binary
+*.pth binary
+*.onnx binary
