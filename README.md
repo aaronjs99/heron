@@ -1,53 +1,48 @@
 # HERON Platform Packages
 
-This repository contains inherited Heron platform description and core ROS
-interfaces used by the GRANDE workspace. GRANDE consumes these interfaces but
-does not use this repository as the authority for real sensor extrinsics,
-runtime networking, or MCU firmware behavior.
+HERON is a ROS 1 platform repository for the Heron unmanned surface vehicle. It
+contains vehicle description assets, ROS interfaces, and platform control
+configuration.
 
-## Packages
+## Quick start
 
-| Package | Purpose |
-| --- | --- |
-| `heron_description` | URDF/Xacro, meshes, and vehicle configuration profiles |
-| `heron_msgs` | Heron-specific ROS messages |
-| `heron_control` | Platform control and state-estimation support |
-
-## Benchmark Profile
-
-The IG Handle benchmark vehicle profile lives at:
-
-```text
-heron_description/urdf/configs/ig_handle_benchmark
-```
-
-Use that profile for simulation and full-stack integration work that needs the
-current hull, inertia, added-mass, damping, and sensor-mount assumptions.
-
-## Typical Use
+With this repository's declared dependencies available in a Catkin workspace,
+publish the vehicle description:
 
 ```bash
 roslaunch heron_description description.launch
 ```
 
-The description launch publishes the robot model for visualization, simulation,
-and TF integration.
+The launch file publishes the robot model for visualization and TF use.
 
-## Workspace Role
+## Documentation
 
-HERON provides the shared platform layer under:
+- [Vehicle description](heron_description/README.md) covers the URDF/Xacro model and profiles.
+- [Control](heron_control/README.md) covers platform control configuration.
+- [Messages](heron_msgs/README.md) documents the ROS interfaces.
 
-- MARINER navigation and drive bridging
-- HERON Simulator vehicle spawn
-- IG Handle sensor-frame integration
-- ORACLE mission execution context
+## Packages
 
-Keep platform geometry here; keep simulation worlds in `heron_simulator` and
-runtime sensing in `ig_handle`.
+| Package | Purpose |
+| --- | --- |
+| heron_description | URDF/Xacro, meshes, and vehicle configuration profiles |
+| heron_msgs | Heron-specific ROS messages |
+| heron_control | Platform control and state-estimation support |
 
-# File Structure
+## Repository scope
 
-| File | Relevance | Dependencies | Used by |
+This repository contains the shared vehicle model, interfaces, and package
+configuration. Keep local edits within these package boundaries and retain the
+upstream file-level notices.
+
+## License
+
+Inherited platform code retains its BSD 3-Clause notices and file-level
+attribution.
+
+## File Structure
+
+| File | Purpose | Dependencies | Used by |
 | --- | --- | --- | --- |
-| .gitattributes | Forces Linux line endings for executable xacro environment profiles. | Git | HERON Simulator xacro launch |
-| .gitignore | Applies the shared GRANDE exclusions for local environments, generated build/runtime artifacts, recordings, media, and editor state; this repository adds no package-specific exclusions. | Git | Repository contributors |
+| `.gitattributes` | Defines text and binary handling for this platform repository. | Git | Repository contributors |
+| `.gitignore` | Excludes local build products and editor state. | Git | Repository contributors |
